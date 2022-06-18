@@ -40,14 +40,18 @@ func main() {
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8080"
+	}
 	httpServer := &http.Server{
-		Addr:           os.Getenv("PORT"),
+		Addr:           port,
 		Handler:        handlers.InitRoutes(),
 		MaxHeaderBytes: 1 << 20,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 	}
-	log.Print("listen port ", os.Getenv("PORT"))
+	log.Print("listen port ", port)
 	if err := httpServer.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

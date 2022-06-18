@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"time"
 
 	"github.com/callmehorhe/konstanta/models"
@@ -18,9 +19,23 @@ func (s *Service) CreateTransaction(transaction models.Transaction) error {
 }
 
 func (s *Service) GetAllTransactionsByID(id int) ([]models.Transaction, error) {
-	return s.repo.GetAllTransactionsByID(id)
+	t, err := s.repo.GetAllTransactionsByID(id)
+	if err != nil {
+		return nil, err
+	}
+	if len(t) < 1 {
+		return nil, errors.New("no transactions")
+	}
+	return t, nil
 }
 
 func (s *Service) GetAllTransactionsByEmail(email string) ([]models.Transaction, error) {
-	return s.repo.GetAllTransactionsByEmail(email)
+	t, err := s.repo.GetAllTransactionsByEmail(email)
+	if err != nil {
+		return nil, err
+	}
+	if len(t) < 1 {
+		return nil, errors.New("no transactions")
+	}
+	return t, nil
 }
