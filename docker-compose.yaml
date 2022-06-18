@@ -2,6 +2,8 @@ version: '3.9'
 services:
   postgres:
     image: postgres:14.2-alpine
+    ports:
+      - 5435:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
@@ -21,5 +23,7 @@ services:
       - DB_NAME=konstanta
       - DB_SSL=disable
       - DB_PASSWORD=123456
+      - PORT=:8080
     depends_on:
       - postgres
+    entrypoint: ["/app/wait-for", "postgres:5432", "--", "/app/main"]
