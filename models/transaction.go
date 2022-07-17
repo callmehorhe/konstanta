@@ -5,7 +5,7 @@ const (
 	StatusSuccess    = "УСПЕХ"
 	StatusNotSuccess = "НЕУСПЕХ"
 	StatusError      = "ОШИБКА"
-	StatusCanceled   = "ОТМЕНЕН"
+	StatusCanceled   = "ОТМЕНЕН" //Статус "ОТМЕНЕН"
 )
 
 type Transaction struct {

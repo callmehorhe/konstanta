@@ -28,7 +28,6 @@ func (h *Handler) UpdateStatus(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, "invalid input")
 		return
 	}
-
 	var err error
 	switch input.Status {
 	case models.StatusSuccess:
